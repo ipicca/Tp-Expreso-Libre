@@ -2,7 +2,17 @@ package expreso_Libre;
 
 public class Viaje {
 
-	private float distancia;
+	
 	private String destino;
+	private int km ;
+	
+	public Viaje () {
+		
+	}
+	
+	public Viaje (String destino, int km) {
+		this.destino=destino;
+		this.km=km;
+	}
 	
 }

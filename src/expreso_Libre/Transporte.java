@@ -2,13 +2,24 @@ package expreso_Libre;
 
 public abstract class Transporte {		//CLASE ABSTRACTA
 
-	private int numId;
-	private double cargaMax;
-	private double capacidadMax;
-	private boolean eqRefri;
-	private boolean enViaje;
-	private float costoKm;
+
+	protected String matricula;
+	protected double cargaMax;
+	protected double capacidad;
+
 	
-	abstract float consultarTarifa();		//TODOS LAS SUBCLASES DEBEN IMPLEMENTAR CONSULTAR TARIFA
+	protected Transporte() {}
+
+	public Transporte(String matricula, double cargaMax, double capacidad) {
+		this.matricula = matricula;
+		this.cargaMax = cargaMax;
+		this.capacidad = capacidad;
+		
+	}
+	
+	public abstract double consultarTarifa();		//TODOS LAS SUBCLASES DEBEN IMPLEMENTAR CONSULTAR TARIFA
+
+
+	
 	
 }
