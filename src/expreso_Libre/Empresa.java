@@ -2,6 +2,7 @@ package expreso_Libre;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 
 
 public class Empresa {
@@ -14,6 +15,7 @@ public class Empresa {
 	//Lista de los Transportes de la empresa. Clave:matricula, Valor: tipoTransporte.
     private HashMap<String,Transporte> listasTransportes;
     private ArrayList<Paquete> paquetes;
+    private LinkedList<Viaje> Ldestinos;
     /*------------------------------------------------*/
     
     // Constructor de la empresa.
@@ -24,6 +26,7 @@ public class Empresa {
 		this.capacidadMaxDepositos = capacidadMaxDepositos;
 		this.listasTransportes= new HashMap<String,Transporte>();
 		this.paquetes= new ArrayList <Paquete>();
+		this.Ldestinos= new LinkedList <Viaje>();
 		
 	}
 	
@@ -31,7 +34,22 @@ public class Empresa {
 	// Es requisito previo, para poder asignar un destino a un transporte.
 	// Si ya existe el destino se debe generar una excepción.
 	public void agregarDestino (String destino,int km) {
-		Viaje nuevoDestino= new Viaje(destino,km);
+		Viaje nuevoDestino= new Viaje (destino,km);
+		
+		if (Ldestinos.isEmpty())//si la lista esta vacia
+			Ldestinos.add(nuevoDestino);
+		else {
+			for (Viaje dest:Ldestinos) {
+				if (dest.getDestino().equals(nuevoDestino.getDestino())
+						&& dest.getKm()==nuevoDestino.getKm()) {
+					
+					throw new RuntimeException ("El destino: "+nuevoDestino.getDestino()+"|"
+							+ nuevoDestino.getKm()+"km, ya existe");
+					}
+				}
+			Ldestinos.add(nuevoDestino);
+		}
+		
 	}
 	
 	
@@ -72,7 +90,7 @@ public class Empresa {
 	// debe haber sido agregado previamente, con el método agregarDestino). 
 	// Si el destino no está registrado, se debe generar una excepción.
 	public void asignarDestino(String matricula, String destino) {
-			
+		
 		}
 	
 	
@@ -83,8 +101,6 @@ public class Empresa {
 	public boolean incorporarPaquete(String destino, double peso, double volumen, 
 			boolean necesitaRefrigeracion) {
 
-		
-		
 		
 		return false;
 	}

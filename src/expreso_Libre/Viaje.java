@@ -15,4 +15,12 @@ public class Viaje {
 		this.km=km;
 	}
 	
+	public String getDestino() {
+		return destino;
+	}
+	
+	public int getKm() {
+		return km;
+	}
+	
 }
