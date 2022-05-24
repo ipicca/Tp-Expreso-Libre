@@ -16,6 +16,8 @@ public class Empresa {
     private HashMap<String,Transporte> listasTransportes;
     private ArrayList<Paquete> paquetes;
     private LinkedList<Viaje> Ldestinos;
+    private ArrayList<Deposito> depositos;
+    private HashMap<String,String> LViajesAsignados; // Clave:matricula, Valor: Destino.
     /*------------------------------------------------*/
     
     // Constructor de la empresa.
@@ -27,6 +29,12 @@ public class Empresa {
 		this.listasTransportes= new HashMap<String,Transporte>();
 		this.paquetes= new ArrayList <Paquete>();
 		this.Ldestinos= new LinkedList <Viaje>();
+		
+		this.LViajesAsignados=new HashMap<String,String>();
+		
+		this.depositos = new ArrayList<Deposito>();
+		this.depositos.add(new Deposito (true,capacidadMaxDepositos));
+		this.depositos.add(new Deposito (false,capacidadMaxDepositos));
 		
 	}
 	
@@ -90,7 +98,29 @@ public class Empresa {
 	// debe haber sido agregado previamente, con el método agregarDestino). 
 	// Si el destino no está registrado, se debe generar una excepción.
 	public void asignarDestino(String matricula, String destino) {
+		boolean hayDestino=false;
+		Transporte transporte=this.listasTransportes.get(matricula);
 		
+		for (Viaje dest:Ldestinos) {
+			// chequear su tienen paquetes, si no, no lo puede agregar
+		
+			if (dest.getDestino().equals(destino)) {
+				
+				if (dest.getKm()>500 && transporte instanceof MegaTrailer) {
+					LViajesAsignados.put(matricula, destino);
+					hayDestino=true;
+				}
+				else if (dest.getKm()<500 && transporte instanceof CamionTrailer) {
+					LViajesAsignados.put(matricula, destino);
+					hayDestino=true;
+				}
+				else {
+					  throw new RuntimeException("El transporte no sirve para este destino"); 
+				}
+			}
+		}
+		if (!hayDestino)
+			throw new RuntimeException("El destino ingresado "+destino+ " no existe"); 
 		}
 	
 	
