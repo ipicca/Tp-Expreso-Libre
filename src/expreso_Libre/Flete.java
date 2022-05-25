@@ -18,7 +18,6 @@ public class Flete extends Transporte  { //HERENCIA DE TRANSPORTE
 		
 	}
 	
-	
 
 	@Override
 	public double consultarTarifa() { // SOBRECARGA O SOBREESCRITURA

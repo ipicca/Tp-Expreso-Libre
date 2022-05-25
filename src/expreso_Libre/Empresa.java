@@ -130,11 +130,17 @@ public class Empresa {
 	
 	public boolean incorporarPaquete(String destino, double peso, double volumen, 
 			boolean necesitaRefrigeracion) {
-
 		
-		return false;
+		Paquete paquete = new Paquete (destino, peso, volumen, necesitaRefrigeracion);
+		
+		for (Deposito dep : this.depositos) {
+			//System.out.println("D refri " + dep.getRefrigferacion() + " P refri "+ paquete.necesitaRefrigeracion()  );
+            if (dep.getRefrigferacion() == paquete.necesitaRefrigeracion()) {
+                    dep.agregarPaquetesAlDeposito(paquete); 
+                }
+            }
+		return true;
 	}
-	
 	
 	// Dado un ID de un transporte se pide cargarlo con toda la mercadería 
 	// posible, de acuerdo al destino del transporte. No se debe permitir // la carga si está en viaje o si no tiene asignado un destino. // Utilizar el depósito acorde para cargarlo. 
@@ -178,6 +184,7 @@ public class Empresa {
 	public String obtenerTransporteIgual(String matricula) {
 		return null;
 	}
+
 	
 	
 	

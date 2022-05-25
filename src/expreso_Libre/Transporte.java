@@ -2,11 +2,10 @@ package expreso_Libre;
 
 public abstract class Transporte {		//CLASE ABSTRACTA
 
-
 	protected String matricula;
 	protected double cargaMax;
 	protected double capacidad;
-
+	protected String destino;
 	
 	protected Transporte() {}
 
@@ -20,6 +19,7 @@ public abstract class Transporte {		//CLASE ABSTRACTA
 	public abstract double consultarTarifa();		//TODOS LAS SUBCLASES DEBEN IMPLEMENTAR CONSULTAR TARIFA
 
 
-	
-	
+
+
 }
+	

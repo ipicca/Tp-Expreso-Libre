@@ -14,7 +14,7 @@ public class Viaje {
 		this.destino=destino;
 		this.km=km;
 	}
-	
+
 	public String getDestino() {
 		return destino;
 	}
