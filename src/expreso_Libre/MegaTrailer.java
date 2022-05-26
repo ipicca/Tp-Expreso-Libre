@@ -26,6 +26,9 @@ public class MegaTrailer extends Transporte { //HERENCIA DE TRANSPORTE
 	public  double consultarTarifa () { // SOBRECARGA O SOBREESCRITURA
 		return segCarga + costoComida + segCarga;
 	}
+	protected boolean estaCargado() {
+		return capacidad == this.capacidad;
+	}
 
 
 	

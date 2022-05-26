@@ -5,13 +5,6 @@ public class CamionTrailer extends Transporte  { //HERENCIA DE TRANSPORTE
 	private double segCarga;
 	private double costoKm;
 	
-	
-	
-	@Override
-	public double consultarTarifa() { // SOBRECARGA O SOBREESCRITURA
-		return segCarga;
-	}
-	
 	public CamionTrailer() {}
 
 	public CamionTrailer(String matricula, double cargaMax, double capacidad, double costoKm,
@@ -22,7 +15,15 @@ public class CamionTrailer extends Transporte  { //HERENCIA DE TRANSPORTE
 		this.costoKm = costoKm;
 	
 	}
-
+	@Override
+	public double consultarTarifa() { // SOBRECARGA O SOBREESCRITURA
+		return segCarga;
+	}
+	protected boolean estaCargado() {
+		return capacidad == this.capacidad;
+	}
+	
+	
 }
 
 

@@ -16,8 +16,9 @@ public abstract class Transporte {		//CLASE ABSTRACTA
 		
 	}
 	
-	public abstract double consultarTarifa();		//TODOS LAS SUBCLASES DEBEN IMPLEMENTAR CONSULTAR TARIFA
+	protected abstract double consultarTarifa();		//TODOS LAS SUBCLASES DEBEN IMPLEMENTAR CONSULTAR TARIFA
 
+	protected abstract boolean estaCargado();
 
 
 

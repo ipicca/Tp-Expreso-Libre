@@ -23,6 +23,9 @@ public class Flete extends Transporte  { //HERENCIA DE TRANSPORTE
 	public double consultarTarifa() { // SOBRECARGA O SOBREESCRITURA
 		return cantAcompaniantes * costoPorAcompaniante;
 	}
+	protected boolean estaCargado() {
+		return capacidad == this.capacidad;
+	}
 
 	
 	

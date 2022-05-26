@@ -12,12 +12,12 @@ public class Empresa {
 	private double capacidadMaxDepositos;
 	
 	/*-----------Estructuras de DATOS---------------*/
-	//Lista de los Transportes de la empresa. Clave:matricula, Valor: tipoTransporte.
-    private HashMap<String,Transporte> listasTransportes;
+    private HashMap<String,Transporte> listasTransportes; 	//Lista de los Transportes de la empresa. Clave:matricula, Valor: tipoTransporte.
     private ArrayList<Paquete> paquetes;
     private LinkedList<Viaje> Ldestinos;
     private ArrayList<Deposito> depositos;
-    private HashMap<String,String> LViajesAsignados; // Clave:matricula, Valor: Destino.
+    private HashMap<String,String> LViajesAsignados; 		// Lista de viajes asignados a un transporte. Clave:matricula, Valor: Destino.
+	private HashMap<String,Boolean> LTransportesEnViaje; 	// Lista de transportes que se encuentran en viaje. Clave:matricula, Valor: En viaje o no.
     /*------------------------------------------------*/
     
     // Constructor de la empresa.
@@ -28,10 +28,9 @@ public class Empresa {
 		this.capacidadMaxDepositos = capacidadMaxDepositos;
 		this.listasTransportes= new HashMap<String,Transporte>();
 		this.paquetes= new ArrayList <Paquete>();
-		this.Ldestinos= new LinkedList <Viaje>();
-		
+		this.Ldestinos= new LinkedList <Viaje>();	
 		this.LViajesAsignados=new HashMap<String,String>();
-		
+		this.LTransportesEnViaje=new HashMap<String,Boolean>();
 		this.depositos = new ArrayList<Deposito>();
 		this.depositos.add(new Deposito (true,capacidadMaxDepositos));
 		this.depositos.add(new Deposito (false,capacidadMaxDepositos));
@@ -143,7 +142,9 @@ public class Empresa {
 	}
 	
 	// Dado un ID de un transporte se pide cargarlo con toda la mercadería 
-	// posible, de acuerdo al destino del transporte. No se debe permitir // la carga si está en viaje o si no tiene asignado un destino. // Utilizar el depósito acorde para cargarlo. 
+	// posible, de acuerdo al destino del transporte. 
+	//No se debe permitir la carga si está en viaje o si no tiene asignado un destino. 
+	// Utilizar el depósito acorde para cargarlo. 
 	// Devuelve un double con el volumen de los paquetes subidos 
 	// al transporte.
 	public double cargarTransporte(String matricula) {
@@ -156,8 +157,16 @@ public class Empresa {
 	// matrícula pasada por parámetro. 
 	// En caso de no tener mercadería cargada o de ya estar en viaje 
 	// se genera una excepción.
-	public void iniciarViaje(String matricula) {
-		
+	public void iniciarViaje(String matricula) {	
+		if (LTransportesEnViaje.containsKey(matricula)) {
+			throw new RuntimeException("El transporte esta en viaje");
+		}
+		else if (listasTransportes.get(matricula).estaCargado()==false) { 
+			throw new RuntimeException("El transporte no tiene mercaderia cargada");
+		}
+		else {
+			LTransportesEnViaje.put(matricula, true);
+		}
 	}
 	
 	
@@ -167,7 +176,9 @@ public class Empresa {
 	// ser vuelto a utilizar en otro viaje. 
 	// Genera excepción si no está actualmente en viaje.
 	public void finalizarViaje(String matricula) {
-		
+			LTransportesEnViaje.remove(matricula); //Finaliza el viaje
+			//TODO	
+			
 	}
 	
 	
