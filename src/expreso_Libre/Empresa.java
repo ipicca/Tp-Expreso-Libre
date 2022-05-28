@@ -147,7 +147,29 @@ public class Empresa {
 	// Devuelve un double con el volumen de los paquetes subidos 
 	// al transporte.
 	public double cargarTransporte(String matricula) {
-		return 0;
+	double volumenSubidos=0;
+		
+		Transporte transporte= LTransportes.get(matricula);
+		String destinoAsignado= LViajesAsignados.get(matricula);//obtengo el destino de LViajesAsignados que 
+																//se la asigno al transporte
+		
+
+		for (Deposito dep:depositos) {
+				for (Paquete paquete: dep.Lpaquetes) {// recorro los paquetes dentro del deposito
+					
+					if (estaRefrigerado(transporte,paquete) && paquete.getDestino().equals(destinoAsignado) 
+							&& transporte.tieneEspacioCarga()){
+								transporte.cargarPaqueteTransporte(paquete);
+								volumenSubidos+=paquete.getVol();
+								actualizarDatosCargaPaquete(dep, transporte,paquete);
+								break;
+								}
+				  			}
+					
+						}
+		
+		
+		return volumenSubidos;
 	}
 	
 	

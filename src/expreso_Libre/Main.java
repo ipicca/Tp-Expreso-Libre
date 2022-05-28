@@ -9,7 +9,7 @@ public class Main {
 		e.agregarDestino("Rosario", 100);
 		e.agregarDestino("Buenos Aires", 400);
 		e.agregarDestino("Mar del Plata", 800);
-		//e.agregarDestino("Mar del Plata", 800);
+	
 		
 
 		//e.mostrarDestinos();
