@@ -12,9 +12,9 @@ public class Empresa {
 	private double capacidadMaxDepositos;
 	
 	/*-----------Estructuras de DATOS---------------*/
-    private HashMap<String,Transporte> listasTransportes; 	//Lista de los Transportes de la empresa. Clave:matricula, Valor: tipoTransporte.
+    private HashMap<String,Transporte> LTransportes; 	//Lista de los Transportes de la empresa. Clave:matricula, Valor: tipoTransporte.
     private ArrayList<Paquete> paquetes;
-    private LinkedList<Viaje> Ldestinos;
+    private LinkedList<Viaje> LDestinos;
     private ArrayList<Deposito> depositos;
     private HashMap<String,String> LViajesAsignados; 		// Lista de viajes asignados a un transporte. Clave:matricula, Valor: Destino.
 	private HashMap<String,Boolean> LTransportesEnViaje; 	// Lista de transportes que se encuentran en viaje. Clave:matricula, Valor: En viaje o no.
@@ -26,9 +26,9 @@ public class Empresa {
 		this.cuit = cuit;
 		this.nombre = nombre;
 		this.capacidadMaxDepositos = capacidadMaxDepositos;
-		this.listasTransportes= new HashMap<String,Transporte>();
+		this.LTransportes= new HashMap<String,Transporte>();
 		this.paquetes= new ArrayList <Paquete>();
-		this.Ldestinos= new LinkedList <Viaje>();	
+		this.LDestinos= new LinkedList <Viaje>();	
 		this.LViajesAsignados=new HashMap<String,String>();
 		this.LTransportesEnViaje=new HashMap<String,Boolean>();
 		this.depositos = new ArrayList<Deposito>();
@@ -43,10 +43,10 @@ public class Empresa {
 	public void agregarDestino (String destino,int km) {
 		Viaje nuevoDestino= new Viaje (destino,km);
 		
-		if (Ldestinos.isEmpty())//si la lista esta vacia
-			Ldestinos.add(nuevoDestino);
+		if (LDestinos.isEmpty())//si la lista esta vacia
+			LDestinos.add(nuevoDestino);
 		else {
-			for (Viaje dest:Ldestinos) {
+			for (Viaje dest:LDestinos) {
 				if (dest.getDestino().equals(nuevoDestino.getDestino())
 						&& dest.getKm()==nuevoDestino.getKm()) {
 					
@@ -54,7 +54,7 @@ public class Empresa {
 							+ nuevoDestino.getKm()+"km, ya existe");
 					}
 				}
-			Ldestinos.add(nuevoDestino);
+			LDestinos.add(nuevoDestino);
 		}
 		
 	}
@@ -66,10 +66,9 @@ public class Empresa {
 	public void agregarTrailer(String matricula, double cargaMax, 
 			double capacidad, boolean tieneRefrigeracion, double costoKm, double segCarga){
 		
-		Transporte trailer=new CamionTrailer(matricula,cargaMax, capacidad, costoKm,
-				tieneRefrigeracion, segCarga);
+		Transporte trailer=new CamionTrailer(matricula,cargaMax, capacidad, tieneRefrigeracion,costoKm,segCarga);
 		
-		listasTransportes.put(matricula, trailer);
+		LTransportes.put(matricula, trailer);
 		
 	}
 	
@@ -79,7 +78,7 @@ public class Empresa {
 		Transporte megatrailer= new MegaTrailer(matricula, cargaMax, capacidad, tieneRefrigeracion, costoKm,
 				segCarga, costoFijo, costoComida);
 		
-		listasTransportes.put(matricula, megatrailer);
+		LTransportes.put(matricula, megatrailer);
 		
 	}
 	
@@ -90,7 +89,7 @@ public class Empresa {
 		Transporte flete= new Flete(matricula, cargaMax, capacidad,costoKm,cantAcompaniantes, 
 				costoPorAcompaniante);
 		
-		listasTransportes.put(matricula, flete);
+		LTransportes.put(matricula, flete);
 	}
 	
 	// Se asigna un destino a un transporte dada su matrícula (el destino 
@@ -98,9 +97,9 @@ public class Empresa {
 	// Si el destino no está registrado, se debe generar una excepción.
 	public void asignarDestino(String matricula, String destino) {
 		boolean hayDestino=false;
-		Transporte transporte=this.listasTransportes.get(matricula);
+		Transporte transporte=this.LTransportes.get(matricula);
 		
-		for (Viaje dest:Ldestinos) {
+		for (Viaje dest:LDestinos) {
 			// chequear su tienen paquetes, si no, no lo puede agregar
 		
 			if (dest.getDestino().equals(destino)) {
@@ -161,7 +160,7 @@ public class Empresa {
 		if (LTransportesEnViaje.containsKey(matricula)) {
 			throw new RuntimeException("El transporte esta en viaje");
 		}
-		else if (listasTransportes.get(matricula).estaCargado()==false) { 
+		else if (LTransportes.get(matricula).estaCargado()==false) { 
 			throw new RuntimeException("El transporte no tiene mercaderia cargada");
 		}
 		else {
@@ -195,6 +194,85 @@ public class Empresa {
 	public String obtenerTransporteIgual(String matricula) {
 		return null;
 	}
+	
+	
+
+	//Metedos AUXILIARES
+	private boolean estaRefrigerado(Transporte transporte, Paquete paquete){
+		
+		boolean resultado=(transporte.tieneRefrigeracion()== paquete.necesitaRefrigeracion());
+	
+		return  resultado;
+	}
+	
+	private boolean actoParaCarga(Transporte transporte, Paquete paquete, String destinoAsignado){
+		
+		boolean refri=(transporte.tieneRefrigeracion()== paquete.necesitaRefrigeracion());
+		boolean mismoDestino=paquete.getDestino().equals(destinoAsignado);
+		boolean tieneEspacioCarga=transporte.tieneEspacioCarga();
+		
+		return  refri && mismoDestino && tieneEspacioCarga;
+	}
+	
+	private void actualizarDatosCargaPaquete(Deposito dep, Transporte transporte,Paquete paquete) {
+
+		dep.setCapacidadDeposito(-(paquete.getVol()));//Vuelvo a sumar el vol del paquete al deposito
+		transporte.setCapacidad(paquete.getVol()); //se le resta el vol actual del trasporte - paquete
+		transporte.setCargaMax(paquete.getPeso()); //sele resta el peso actual del transporte
+		dep.retirarPaqueteDep(paquete);// lo borro del Lista de paquetes en el Deposito
+	
+	}
+	
+	public void mostrarViajesAsignadosTrasnporte() {
+		System.out.println();
+		System.out.println();
+		System.out.println("Destinos asignados a los transportes");
+	
+		
+		for (String key: LViajesAsignados.keySet()){  
+			System.out.println(key+ " = " + LViajesAsignados.get(key));
+		} 
+	}
+	
+	public void mostrasDestinos() {
+		for (Viaje dest:LDestinos) {
+			System.out.println(dest.getDestino());
+		}
+	}
+	
+	public void mostrarDepositosCargados() {
+
+		for(Deposito dep:depositos) {
+			if (dep.getRefrigferacion()) {
+				System.out.println("vol de dep con regri: "+dep.getCapacidadDeposito()+" "+dep.getRefrigferacion());
+			}
+			else {
+				System.out.println("vol de dep SIN regri: "+dep.getCapacidadDeposito()+" "+dep.getRefrigferacion());
+			}
+		}
+	}
+	
+	private boolean asignarDesitnoAMegaTrailer(Transporte transporte, Viaje dest) {
+		return dest.getKm()>500 && transporte instanceof MegaTrailer;
+	}
+	
+	private boolean asignarDestinoACamionTrailer(Transporte transporte, Viaje dest) {
+		return dest.getKm()<500 && transporte instanceof CamionTrailer;
+	}
+
+	public void mostrarContenidoDelosDepositos() {
+		for (Deposito dep: depositos) {
+			dep.mostrarPaquetesDelDeposito();
+		}
+	}
+	
+	public void mostrarCargaTransporte(String matricula) {
+		
+		Transporte transporte= LTransportes.get(matricula);
+		transporte.mostrarPaquetesCargados();
+		
+	}
+
 
 	
 	
