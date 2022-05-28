@@ -5,13 +5,13 @@ public class Paquete {
 	private String destino;
 	private double volumen;
 	private double peso;
-	private boolean refrigeracion;
+	private boolean necesitaRefrigeracion;
 	
-	public Paquete(String destino, double volumen, double peso, boolean necesitaRefrigeracion) {
+	public Paquete(String destino, double peso, double vol, boolean necesitaRefrigeracion) {
 		this.destino = destino;
-		this.volumen = volumen;
 		this.peso = peso;
-		this.refrigeracion = necesitaRefrigeracion;
+		this.volumen = vol;
+		this.necesitaRefrigeracion = necesitaRefrigeracion;
 	}
 	
 	public String getDestino() {
@@ -27,10 +27,13 @@ public class Paquete {
 	    }
 
 	 public boolean necesitaRefrigeracion() {
-		 return this.refrigeracion;
+		 return this.necesitaRefrigeracion;
 	    }
-
 	 
-}
-	
+	 public boolean paqueteConElMismoDestino(String Nuevodestino) {
+		 return destino.equals(Nuevodestino);
+	 }
 
+	
+	
+}
