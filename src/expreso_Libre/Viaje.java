@@ -1,5 +1,7 @@
 package expreso_Libre;
 
+
+
 public class Viaje {
 
 	
@@ -14,7 +16,7 @@ public class Viaje {
 		this.destino=destino;
 		this.km=km;
 	}
-
+	
 	public String getDestino() {
 		return destino;
 	}
@@ -22,5 +24,12 @@ public class Viaje {
 	public int getKm() {
 		return km;
 	}
+
+	@Override
+	public String toString() {
+		return "Viaje [destino=" + destino + ", km=" + km + "]";
+	}
+	
+	
 	
 }
