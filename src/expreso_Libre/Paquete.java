@@ -34,16 +34,31 @@ public class Paquete {
 		 return destino.equals(Nuevodestino);
 	 }
 	 
-	 @Override
-	 public boolean equals (Object obj){
-	 if (obj ==null)
-	   return false;
-	 if(!this.getClass().getName().equals(obj.getClass().getName()))
-	   return false;
-	 Paquete otro= (Paquete) obj;
-	 return this.destino.equals(otro.getDestino()) && this.peso==otro.getPeso()
-	 && this.volumen==otro.getVol() && this.necesitaRefrigeracion==otro.necesitaRefrigeracion();
+	 public boolean equals2 (Paquete p) {
+		
+		 return this.destino.equals(p.getDestino()) && this.peso==p.getPeso() 
+					&& this.volumen==p.getVol() && this.necesitaRefrigeracion==p.necesitaRefrigeracion(); 
 	 }
+
+	void mostrarPaquete() {
+		System.out.println("destino="+getDestino());
+		System.out.println("peso="+getPeso());
+		System.out.println("vol="+getVol());
+		System.out.println("refri="+necesitaRefrigeracion());
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+
+		if (obj == null)
+			return false;
+		if (!this.getClass().getName().equals(obj.getClass().getName()))
+			return false;
+		Paquete otro = (Paquete) obj;
 	
+		return this.destino.equals(otro.getDestino()) && this.peso==otro.getPeso() 
+		&& this.volumen==otro.getVol() && this.necesitaRefrigeracion==otro.necesitaRefrigeracion(); 
+	}
 	
 }
