@@ -33,7 +33,17 @@ public class Paquete {
 	 public boolean paqueteConElMismoDestino(String Nuevodestino) {
 		 return destino.equals(Nuevodestino);
 	 }
-
+	 
+	 @Override
+	 public boolean equals (Object obj){
+	 if (obj ==null)
+	   return false;
+	 if(!this.getClass().getName().equals(obj.getClass().getName()))
+	   return false;
+	 Paquete otro= (Paquete) obj;
+	 return this.destino.equals(otro.getDestino()) && this.peso==otro.getPeso()
+	 && this.volumen==otro.getVol() && this.necesitaRefrigeracion==otro.necesitaRefrigeracion();
+	 }
 	
 	
 }

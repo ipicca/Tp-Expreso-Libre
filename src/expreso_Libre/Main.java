@@ -43,7 +43,7 @@ public class Main {
 		System.out.println(e.toString());
 		
 		e.finalizarViaje("AA333XQ");
-		//e.mostrarCargaTransporte("AA333XQ");
+		e.mostrarCargaTransporte("AA333XQ");
 		System.out.println(e.toString());
 		}
 

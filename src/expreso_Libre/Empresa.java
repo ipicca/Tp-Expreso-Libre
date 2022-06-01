@@ -185,6 +185,7 @@ public class Empresa {
 					
 					Paquete paquete = new Paquete(dest,peso,vol,refri);
 					
+		
 					if (actoParaCarga(transporte, paquete, destinoAsignado)) {
 						
 								transporte.cargarPaqueteTransporte(paquete);

@@ -1,6 +1,5 @@
 package expreso_Libre;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class MegaTrailer extends Transporte { //HERENCIA DE TRANSPORTE 
@@ -10,7 +9,7 @@ public class MegaTrailer extends Transporte { //HERENCIA DE TRANSPORTE
 	private double costoFijo;
 	private double costoComida;
 	public LinkedList<Paquete> paquetesMegaTrailer;
-	private boolean disponible;
+
 	
 	public MegaTrailer() {}
 	
@@ -19,8 +18,8 @@ public class MegaTrailer extends Transporte { //HERENCIA DE TRANSPORTE
 		
 		super(matricula, cargaMax, capacidad);
 		
-		//this.tieneRefrigeracion = tieneRefrigeracion;
-		this.costoKm = costoKm;
+
+		this.costoKm=costoKm;
 		this.segCarga = segCarga;
 		this.costoFijo = costoFijo;
 		this.costoComida = costoComida;
@@ -29,8 +28,15 @@ public class MegaTrailer extends Transporte { //HERENCIA DE TRANSPORTE
 
 
 	@Override
-	public  double consultarTarifa () { // SOBRECARGA O SOBREESCRITURA
-		return segCarga + costoComida + segCarga;
+	public String toString() {
+		return "MegaTrailer [tieneRefrigeracion=" + tieneRefrigeracion + ", costoKm=" + costoKm + ", segCarga="+"\n"
+				+ segCarga + ", costoFijo=" + costoFijo + ", costoComida=" + costoComida + ", paquetesMegaTrailer="
+				+ paquetesMegaTrailer + "]";
+	}
+
+	@Override
+	public  double consultarTarifa (double cantKm) { // SOBRECARGA O SOBREESCRITURA
+		return cantKm*costoKm+segCarga + costoComida +costoFijo;
 	}
 	
 	@Override
@@ -40,58 +46,20 @@ public class MegaTrailer extends Transporte { //HERENCIA DE TRANSPORTE
 	
 	@Override
 	 public void cargarPaqueteTransporte(Paquete paquete) {
-		paquetesMegaTrailer.add(paquete);
+		 paquetesMegaTrailer.add(paquete);
+		this.setCapacidad(paquete.getVol()); //se le resta el vol actual del trasporte - paquete
+		this.setCargaMax(paquete.getPeso()); //se le resta el peso actual del transporte
 	}
 	
 	@Override
 	public boolean tienePaquetes() {
 		return paquetesMegaTrailer.size()>0;
 	}
-	
-	@Override
-	public boolean estaCargado() {
-		return 	paquetesMegaTrailer.size()>0;
-	}
-	/*
-	@Override
-	public  double getCargaMax() {
-		return this.cargaMax;
-	}
 
-	@Override
-	public void setCargaMax(double kg) {
-		this.cargaMax-=kg;
-	}
+
 	
-	@Override
-	public  double getCapacidad() {
-		return this.capacidad;
-	}
-	
-	@Override
-	public  void setCapacidad(double vol) {
-		this.capacidad-=vol;
-	}
-	*/
-	@Override
-	public boolean estaDisponibleParaUnViaje () {
-		return disponible;
-	}
-	
-	public void cambiarEstaDisponible() {
-		if (disponible) {
-			disponible=false;
-		}
-		else {
-			disponible=true;
-		}
-		
-	}
-	/*
-	public boolean tieneEspacioCarga() {
-		return cargaMax> 0 && capacidad > 0 ;
-	}
-	*/
+
+
 	public double obtenerPesoCompletoPaquetes() {
 		double pesoTot=0;
 		
@@ -115,8 +83,33 @@ public class MegaTrailer extends Transporte { //HERENCIA DE TRANSPORTE
 	}
 	
 	@Override
+	public boolean asignarDestinoTransporte(Viaje dest,Transporte transporte) {
+		return dest.getKm()>500 && transporte instanceof MegaTrailer;
+	}
+	
+	
+	@Override
+	public void vaciarCarga() {
+		paquetesMegaTrailer.clear();
+	}
+	
+	@Override
+	public String tipoTransporte() {
+		return "Mega Trailer";
+	}
+	
+	@Override
 	public void mostrarPaquetesCargados() {
-
+		
+		if (paquetesMegaTrailer.size()==0) {
+			System.out.println("---------------------------");
+			System.out.println("Paquetes de MEGA TRAILER");
+			System.out.println("---------------------------");
+			System.out.println("-NO TIENE PAQUETES CARGADOS-");
+			System.out.println("---------------------------");
+			
+		}
+		
 		for (Paquete paq:paquetesMegaTrailer) {
 			System.out.println("---------------------------");
 			System.out.println("Paquetes de MEGA TRAILER");
@@ -134,3 +127,4 @@ public class MegaTrailer extends Transporte { //HERENCIA DE TRANSPORTE
 	
 	
 }
+
