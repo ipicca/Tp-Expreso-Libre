@@ -2,42 +2,43 @@ package expreso_Libre;
 
 import java.util.LinkedList;
 
-public class Flete extends Transporte  { //HERENCIA DE TRANSPORTE 
+public class Flete extends Transporte  { //Flete HEREDA de transporte.
+	
 	private double costoKm;
 	private int cantAcompaniantes;
 	private double costoPorAcompaniante;
 	public LinkedList<Paquete> paquetesFlete;
 
-	
+	//Constructor de Flete.
 	
 	public Flete() {}
 	public Flete(String matricula, double cargaMax, double capacidad,
 			 double costoKm, int cantAcompaniantes, double costoPorAcompaniante) {
-		
 		super(matricula, cargaMax, capacidad);
 		this.costoKm=costoKm;
 		this.cantAcompaniantes = cantAcompaniantes;
 		this.costoPorAcompaniante = costoPorAcompaniante;
 		paquetesFlete= new LinkedList<Paquete>();
-		
 	}
 	
 	
-
+	/*-----------toString de Fletes---------------*/
 	@Override
 	public String toString() {
-		return "Flete [costoKm=" + costoKm + ", cantAcompaniantes=" + cantAcompaniantes + ", costoPorAcompaniante="
-				+ costoPorAcompaniante + ", paquetesFlete=" + paquetesFlete ;
-	}
+		return "\n" + " * Fletes: " + "\n" + "	Su costo por kilometro es: " + costoKm +"\n" + "	Cantidad de acompañantes: " + cantAcompaniantes 
+				+ "\n" + "	Su costo por acompañante es: " + costoPorAcompaniante + "\n";
+		}
+	
+	
+	/*----------- Metodos abstractos a implementar ---------------*/
+	
 	@Override
 	public double consultarTarifa(double cantKm) { // SOBRECARGA O SOBREESCRITURA
 		return (cantKm*costoKm) + (cantAcompaniantes * costoPorAcompaniante);
 	}
-
 	
 	@Override
-	public boolean tieneRefrigeracion() {
-		
+	public boolean tieneRefrigeracion() {		
 		return false;
 	}
 	
@@ -45,8 +46,7 @@ public class Flete extends Transporte  { //HERENCIA DE TRANSPORTE
 	 public void cargarPaqueteTransporte(Paquete paquete) {
 		paquetesFlete.add(paquete);
 		this.setCapacidad(paquete.getVol()); //se le resta el vol actual del trasporte - paquete
-		this.setCargaMax(paquete.getPeso()); //se le resta el peso actual del transporte
-		
+		this.setCargaMax(paquete.getPeso()); //se le resta el peso actual del transporte		
 	}
 	
 	@Override
@@ -54,28 +54,6 @@ public class Flete extends Transporte  { //HERENCIA DE TRANSPORTE
 		return paquetesFlete.size()>0;
 	}
 
-
-	public double obtenerPesoCompletoPaquetes() {
-		double pesoTot=0;
-		
-		for (Paquete paquete:paquetesFlete) {
-			 pesoTot+=paquete.getPeso();
-		}
-		
-		 return pesoTot;
-	}
-	
-	public double obtenerVolCompletoPaquetes() {
-		
-	double volTot=0;
-		
-		for (Paquete paquete:paquetesFlete) {
-			volTot+=paquete.getVol();
-		}
-		
-		 return volTot;
-	
-	}
 	@Override
 	public void vaciarCarga() {
 		paquetesFlete.clear();
@@ -91,21 +69,15 @@ public class Flete extends Transporte  { //HERENCIA DE TRANSPORTE
 		return "Flete";
 	}
 	
-	
-	
 	@Override
-	public void mostrarPaquetesCargados() {
-		
+	public void mostrarPaquetesCargados() {	
 		if (paquetesFlete.size()==0) {
 			System.out.println("---------------------------");
 			System.out.println("Paquetes de FLETE");
 			System.out.println("---------------------------");
 			System.out.println("-NO TIENE PAQUETES CARGADOS-");
-			System.out.println("---------------------------");
-			
-		}
-		
-		
+			System.out.println("---------------------------");	
+		}		
 		for (Paquete paq:paquetesFlete) {
 			System.out.println("---------------------------");
 			System.out.println("Paquetes de FLETE");
@@ -118,8 +90,26 @@ public class Flete extends Transporte  { //HERENCIA DE TRANSPORTE
 		}
 	}
 	
+	/*----------- Metodos ---------------*/
 	
-
+	public double obtenerPesoCompletoPaquetes() {
+		double pesoTot=0;
+		for (Paquete paquete:paquetesFlete) {
+			 pesoTot+=paquete.getPeso();
+		}		
+		 return pesoTot;
+	}
+	
+	public double obtenerVolCompletoPaquetes() {		
+	double volTot=0;		
+		for (Paquete paquete:paquetesFlete) {
+			volTot+=paquete.getVol();
+		}		
+		 return volTot;	
+	}
+	
+	//---------------------------------------------------------------- FIN CLASE FLETE ----------------------------------------------------------------//	
+	
 }
 
 

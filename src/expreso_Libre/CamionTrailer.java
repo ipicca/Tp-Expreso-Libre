@@ -1,33 +1,34 @@
 package expreso_Libre;
 
-
 import java.util.LinkedList;
 
-public class CamionTrailer extends Transporte  { //HERENCIA DE TRANSPORTE 
+public class CamionTrailer extends Transporte  { //Camion trailer HEREDA de transporte.
+	
 	private boolean tieneRefrigeracion;
 	private double segCarga;
 	private double costoKm;
 	public LinkedList<Paquete> paquetesCamionTrailer;
 	
+	/*-----------toString de CamionTrailer---------------*/
 	@Override
 	public String toString() {
-		return "CamionTrailer [tieneRefrigeracion=" + tieneRefrigeracion + ", segCarga=" + segCarga + ", costoKm="
-				+ costoKm +", paquetesCamionTrailer=" + paquetesCamionTrailer + "]";
+		return "\n" + " * Camion Trailer: " + "\n" + "	Tiene refrigeracion: " + tieneRefrigeracion + "\n" + "	Su seguro de carga es: " + segCarga + 
+				"\n" + "	Su costo por kilometro es: " + costoKm +"\n";
 	}
-
-	public CamionTrailer() {}
-
+	
+	//Constructor del CamionTrailer.
+	
 	public CamionTrailer(String matricula, double cargaMax, double capacidad, boolean tieneRefrigeracion,double costoKm,
 		double segCarga) {
 		super(matricula, cargaMax, capacidad);
 		this.costoKm=costoKm;
 		this.tieneRefrigeracion = tieneRefrigeracion;
 		this.segCarga = segCarga;
-
 		paquetesCamionTrailer= new LinkedList <Paquete>();
-
-	
 	}
+	
+	
+	/*----------- Metodos abstractos a implementar ---------------*/
 	
 	@Override
 	public boolean tieneRefrigeracion() {
@@ -51,39 +52,29 @@ public class CamionTrailer extends Transporte  { //HERENCIA DE TRANSPORTE
 	public double consultarTarifa(double cantKm) { // SOBRECARGA O SOBREESCRITURA
 		return cantKm*costoKm+segCarga;
 	}
-	
-	
 
 	@Override
 	public double obtenerPesoCompletoPaquetes() {
 		double pesoTot=0;
-		
 		for (Paquete paquete:paquetesCamionTrailer) {
 			 pesoTot+=paquete.getPeso();
-		}
-		
+		}	
 		 return pesoTot;
 	}
 	
 	@Override
-	public double obtenerVolCompletoPaquetes() {
-		
-	double volTot=0;
-		
+	public double obtenerVolCompletoPaquetes() {		
+	double volTot=0;		
 		for (Paquete paquete:paquetesCamionTrailer) {
 			volTot+=paquete.getVol();
-		}
-		
-		 return volTot;
-	
+		}		
+		 return volTot;	
 	}
 	
 	@Override
 	public boolean asignarDestinoTransporte(Viaje dest,Transporte transporte) {
 		return  dest.getKm()<500 && transporte instanceof CamionTrailer ;
 	}
-	
-	
 	
 	@Override
 	public void vaciarCarga() {
@@ -95,19 +86,15 @@ public class CamionTrailer extends Transporte  { //HERENCIA DE TRANSPORTE
 		return "Camion Trailer";
 	}
 	
-	
 	@Override
-	public void mostrarPaquetesCargados() {
-		
+	public void mostrarPaquetesCargados() {	
 		if (paquetesCamionTrailer.size()==0) {
 			System.out.println("---------------------------");
 			System.out.println("Paquetes de CAMION TRAILER");
 			System.out.println("---------------------------");
 			System.out.println("-NO TIENE PAQUETES CARGADOS-");
-			System.out.println("---------------------------");
-			
+			System.out.println("---------------------------");	
 		}
-	
 		for (Paquete paq:paquetesCamionTrailer) {
 			System.out.println("---------------------------");
 			System.out.println("Paquetes de CAMION TRAILER");
@@ -120,6 +107,6 @@ public class CamionTrailer extends Transporte  { //HERENCIA DE TRANSPORTE
 		}
 	}
 	
-	
+	//---------------------------------------------------------------- FIN CLASE CAMIONTRAILER ----------------------------------------------------------------//
 
 }

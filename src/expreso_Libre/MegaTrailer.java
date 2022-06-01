@@ -2,7 +2,7 @@ package expreso_Libre;
 
 import java.util.LinkedList;
 
-public class MegaTrailer extends Transporte { //HERENCIA DE TRANSPORTE 
+public class MegaTrailer extends Transporte { //MegaTrailer HEREDA de transporte.
 	private boolean tieneRefrigeracion;
 	private double costoKm;
 	private double segCarga;
@@ -10,15 +10,13 @@ public class MegaTrailer extends Transporte { //HERENCIA DE TRANSPORTE
 	private double costoComida;
 	public LinkedList<Paquete> paquetesMegaTrailer;
 
+	//Constructor de Flete.
 	
 	public MegaTrailer() {}
-	
 	public MegaTrailer(String matricula, double cargaMax, double capacidad, boolean tieneRefrigeracion, double costoKm,
 			double segCarga, double costoFijo, double costoComida) {
 		
 		super(matricula, cargaMax, capacidad);
-		
-
 		this.costoKm=costoKm;
 		this.segCarga = segCarga;
 		this.costoFijo = costoFijo;
@@ -26,14 +24,16 @@ public class MegaTrailer extends Transporte { //HERENCIA DE TRANSPORTE
 		paquetesMegaTrailer= new LinkedList<Paquete>();
 	}
 
-
+	/*-----------toString de MegaTrailer---------------*/
 	@Override
 	public String toString() {
-		return "MegaTrailer [tieneRefrigeracion=" + tieneRefrigeracion + ", costoKm=" + costoKm + ", segCarga="+"\n"
-				+ segCarga + ", costoFijo=" + costoFijo + ", costoComida=" + costoComida + ", paquetesMegaTrailer="
-				+ paquetesMegaTrailer + "]";
+		return "\n" +" * MegaTrailer: " + "\n" + "	Tiene refrigeracion: " + tieneRefrigeracion + "\n" + "	Su costo por kilometro es: " + costoKm + "\n" + 
+	"	Tiene seguro de carga="+ segCarga +  "\n" + "	Su costo fijo es de: " + costoFijo +  "\n" + "	Su costo de comida es:" + costoComida +  "\n";
 	}
 
+	
+	/*----------- Metodos abstractos a implementar ---------------*/
+	
 	@Override
 	public  double consultarTarifa (double cantKm) { // SOBRECARGA O SOBREESCRITURA
 		return cantKm*costoKm+segCarga + costoComida +costoFijo;
@@ -56,37 +56,10 @@ public class MegaTrailer extends Transporte { //HERENCIA DE TRANSPORTE
 		return paquetesMegaTrailer.size()>0;
 	}
 
-
-	
-
-
-	public double obtenerPesoCompletoPaquetes() {
-		double pesoTot=0;
-		
-		for (Paquete paquete:paquetesMegaTrailer) {
-			 pesoTot+=paquete.getPeso();
-		}
-		
-		 return pesoTot;
-	}
-	
-	public double obtenerVolCompletoPaquetes() {
-		
-	double volTot=0;
-		
-		for (Paquete paquete:paquetesMegaTrailer) {
-			volTot+=paquete.getVol();
-		}
-		
-		 return volTot;
-	
-	}
-	
 	@Override
 	public boolean asignarDestinoTransporte(Viaje dest,Transporte transporte) {
 		return dest.getKm()>500 && transporte instanceof MegaTrailer;
 	}
-	
 	
 	@Override
 	public void vaciarCarga() {
@@ -99,17 +72,14 @@ public class MegaTrailer extends Transporte { //HERENCIA DE TRANSPORTE
 	}
 	
 	@Override
-	public void mostrarPaquetesCargados() {
-		
+	public void mostrarPaquetesCargados() {	
 		if (paquetesMegaTrailer.size()==0) {
 			System.out.println("---------------------------");
 			System.out.println("Paquetes de MEGA TRAILER");
 			System.out.println("---------------------------");
 			System.out.println("-NO TIENE PAQUETES CARGADOS-");
-			System.out.println("---------------------------");
-			
-		}
-		
+			System.out.println("---------------------------");			
+		}	
 		for (Paquete paq:paquetesMegaTrailer) {
 			System.out.println("---------------------------");
 			System.out.println("Paquetes de MEGA TRAILER");
@@ -121,10 +91,26 @@ public class MegaTrailer extends Transporte { //HERENCIA DE TRANSPORTE
 			System.out.println("---------------------------");
 		}
 	}
-
-
 	
+	/*----------- Metodos ---------------*/
+
+	public double obtenerPesoCompletoPaquetes() {
+		double pesoTot=0;
+		for (Paquete paquete:paquetesMegaTrailer) {
+			 pesoTot+=paquete.getPeso();
+		}		
+		 return pesoTot;
+	}
 	
+	public double obtenerVolCompletoPaquetes() {	
+	double volTot=0;		
+		for (Paquete paquete:paquetesMegaTrailer) {
+			volTot+=paquete.getVol();
+		}	
+		 return volTot;	
+	}
+	
+	//---------------------------------------------------------------- FIN CLASE MEGATRAILER ----------------------------------------------------------------//	
 	
 }
 

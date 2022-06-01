@@ -4,28 +4,28 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 public class Deposito {
-
+	
 	private boolean conRefrigeracion;
 	private double capacidadDeposito;
 	public LinkedList<Paquete> Lpaquetes;	
 	
-	public Deposito(boolean conRefrigeracion,double capacidadDeposito) {
-		
+	
+	//Constructor de los depositos.
+	
+	public Deposito(boolean conRefrigeracion,double capacidadDeposito) {	
 		this.conRefrigeracion = conRefrigeracion;
 		this.capacidadDeposito = capacidadDeposito;
 		this.Lpaquetes= new LinkedList <Paquete>();
 	}
 	
-	
-	
+	/*-----------toString de depositos---------------*/
 	@Override
 	public String toString() {
-		return "Deposito [conRefrigeracion=" + conRefrigeracion + ", capacidadDeposito=" + capacidadDeposito
-				+ ", Lpaquetes=" + Lpaquetes + "]";
+		return  "\n"+ "		Deposito con capacidad de refrigeracion: " + conRefrigeracion + " 	||" + " Capacidad máxima del mismo: " + capacidadDeposito;
 	}
 
-
-
+	/*----------- Metodos ---------------*/
+	
 	public boolean getRefrigferacion() {
 		return this.conRefrigeracion;
 	}
@@ -43,12 +43,10 @@ public class Deposito {
 			throw new RuntimeException("No se pudo agregar por falta de capacidad");
         }
 		Lpaquetes.add(paquete);	
-		setCapacidadDeposito(paquete.getVol()); 
-					
+		setCapacidadDeposito(paquete.getVol()); 			
     }
 	
-	public void retirarPaqueteDep(Paquete p) {
-		
+	public void retirarPaqueteDep(Paquete p) {	
 		Iterator<Paquete> it = Lpaquetes.iterator();
 		while (it.hasNext()) {
 			 Paquete  paq = (Paquete)it.next();
@@ -62,11 +60,7 @@ public class Deposito {
 		return this.getRefrigferacion() == paquete.necesitaRefrigeracion() && paquete.getVol()<this.getCapacidadDeposito();
 	}
 	
-	
-
-	
-	public boolean actoParaCarga(Transporte transporte){		
-			
+	public boolean actoParaCarga(Transporte transporte){			
 			boolean refri=transporte.tieneRefrigeracion()==getRefrigferacion();
 			boolean tieneEspacioCarga=transporte.tieneEspacioCarga();
 			return  refri && tieneEspacioCarga;
@@ -84,9 +78,12 @@ public class Deposito {
 			System.out.println("  "+p.necesitaRefrigeracion());
 			System.out.println();
 			System.out.println();
-			
 		}
 	}
+}	
+	//---------------------------------------------------------------- FIN CLASE DEPOSITOS ----------------------------------------------------------------//	
+
+
 	/*
 	@Override
 	public String toString(){
@@ -107,4 +104,4 @@ public class Deposito {
 	}
 	*/
 	
-}
+

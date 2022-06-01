@@ -1,29 +1,33 @@
 package expreso_Libre;
 
-public abstract class Transporte {		//CLASE ABSTRACTA
-
-
+public abstract class Transporte {	//Clase abstracta 
+	
 	protected String matricula;
 	protected double cargaMax;
 	protected double capacidad;
 	protected boolean disponibilidad;
 	protected boolean enViaje;
 	
+	//Constructor de transporte.
+	
 	protected Transporte() {}
-
 	public Transporte(String matricula, double cargaMax, double capacidad) {
 		this.matricula = matricula;
 		this.cargaMax = cargaMax;
 		this.capacidad = capacidad;
 		enViaje = false;
 		disponibilidad = true;
+	}	
+		
+	/*-----------toString de Transportes---------------*/
 	
-	}
 	@Override
 	public String toString() {
-		return "Transporte [matricula=" + matricula + ", cargaMax=" + cargaMax + ", capacidad=" + capacidad
-				+ ", enViaje=" + disponibilidad + "]";
+		return  "\n" + " Dominio: " +matricula + ", cargaMax=" + cargaMax + ", capacidad=" + capacidad
+				+ ", enViaje=" + disponibilidad;
 	}
+	
+	/*----------- Metodos ---------------*/
 	
 	public void setCapacidad(double capacidad) {
 		this.capacidad -= capacidad;
@@ -70,39 +74,14 @@ public abstract class Transporte {		//CLASE ABSTRACTA
 			disponibilidad=true;
 		}
 	}
-
-	public boolean tieneEspacioCarga() {
-		return cargaMax > 0 && capacidad >0;
-	}
 	
 	public void cambiarEstado2(boolean tipo) {
 		disponibilidad=tipo;
 	}
-	
 
-	public abstract double consultarTarifa(double cantKm);
-	
-	public abstract boolean tieneRefrigeracion();
-	
-	
-    public abstract boolean tienePaquetes();
-    
-	public abstract void cargarPaqueteTransporte(Paquete paquete);
-	
-	
-	public abstract double obtenerPesoCompletoPaquetes();
-	
-	public abstract double obtenerVolCompletoPaquetes();
-
-	public abstract void mostrarPaquetesCargados();
-	
-	public abstract void vaciarCarga();
-	
-	public abstract boolean asignarDestinoTransporte(Viaje dest,Transporte transporte);
-	
-	public abstract String tipoTransporte();
-
-	
+	public boolean tieneEspacioCarga() {
+		return cargaMax > 0 && capacidad >0;
+	}
 	
 	public void actualizarDatosDelTransporte() {
 		setCapacidad(-(obtenerVolCompletoPaquetes())); // se vuelve a reincoprar el vol
@@ -110,8 +89,36 @@ public abstract class Transporte {		//CLASE ABSTRACTA
 		vaciarCarga();//se blanquea toda la lista de paquetes del transporte
 		cambiarEstado(); // disponibilidad = true;
 		cambiarViaje();	// enViaje = false;
-	
 	}
+	
+	public void datosTransporte() {
+		System.out.println("capacidad= lts "+this.getCapacidad());
+		System.out.println("carga Max= kg "+this.getCargaMax());
+		System.out.println("Disp="+this.estado());
+	}
+	
+	/*----------- Metodos abstractos que obliga a implementar ---------------*/
+
+	public abstract boolean asignarDestinoTransporte(Viaje dest,Transporte transporte);
+	
+	public abstract boolean tieneRefrigeracion();
+		
+    public abstract boolean tienePaquetes();
+	
+	public abstract double consultarTarifa(double cantKm);
+    
+	public abstract double obtenerPesoCompletoPaquetes();
+	
+	public abstract double obtenerVolCompletoPaquetes();
+
+	public abstract void cargarPaqueteTransporte(Paquete paquete);
+	
+	public abstract void mostrarPaquetesCargados();
+	
+	public abstract void vaciarCarga();
+	
+	public abstract String tipoTransporte();
+	
 	
 	@Override
 	public boolean equals(Object obj) {
@@ -125,13 +132,7 @@ public abstract class Transporte {		//CLASE ABSTRACTA
 				&& this.tipoTransporte().equals(otro.tipoTransporte());
 	}
 	
-	public void datosTransporte() {
-		System.out.println("capacidad= lts "+this.getCapacidad());
-		System.out.println("carga Max= kg "+this.getCargaMax());
-		System.out.println("Disp="+this.estado());
-	}
-
-	
+	//---------------------------------------------------------------- FIN CLASE TRANSPORTE ----------------------------------------------------------------//	
 	
 }
 	

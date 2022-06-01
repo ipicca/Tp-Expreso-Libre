@@ -37,14 +37,16 @@ public class Main {
 		volumen = e.cargarTransporte("AA333XQ");
 		System.out.println("Se cargaron " + volumen + " metros cubicos en el transp AA333XQ");
 		
-		e.iniciarViaje("AA333XQ");
+		//e.iniciarViaje("AA333XQ");
 		
-		System.out.println("Costo del viaje:" +e.obtenerCostoViaje("AA333XQ"));		
+		//System.out.println("Costo del viaje:" +e.obtenerCostoViaje("AA333XQ"));	
+		
 		System.out.println(e.toString());
 		
-		e.finalizarViaje("AA333XQ");
-		e.mostrarCargaTransporte("AA333XQ");
+		//e.finalizarViaje("AA333XQ");
+	
 		System.out.println(e.toString());
+		
 		}
 
 	
