@@ -53,19 +53,6 @@ public abstract class Transporte {	//Clase abstracta
 		return disponibilidad;
 	}
 	
-	public void cambiarViaje() {
-		if (!enViaje) {
-			enViaje=true;
-		}
-		else {
-			enViaje=false;
-		}
-	}
-	
-	public boolean enViaje() { 
-		return enViaje;
-	}
-	
 	public void cambiarEstado() {
 		if (disponibilidad) {
 			disponibilidad=false;
@@ -75,9 +62,21 @@ public abstract class Transporte {	//Clase abstracta
 		}
 	}
 	
-	public void cambiarEstado2(boolean tipo) {
-		disponibilidad=tipo;
+	public boolean enViaje() { 
+		return enViaje;
 	}
+	
+	public void cambiarViaje() {
+		if (!enViaje) {
+			enViaje=true;
+		}
+		else {
+			enViaje=false;
+		}
+	}
+	
+	
+
 
 	public boolean tieneEspacioCarga() {
 		return cargaMax > 0 && capacidad >0;

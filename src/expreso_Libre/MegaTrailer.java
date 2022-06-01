@@ -67,6 +67,23 @@ public class MegaTrailer extends Transporte { //MegaTrailer HEREDA de transporte
 	}
 	
 	@Override
+	public double obtenerPesoCompletoPaquetes() {
+		double pesoTot=0;
+		for (Paquete paquete:paquetesMegaTrailer) {
+			 pesoTot+=paquete.getPeso();
+		}		
+		 return pesoTot;
+	}
+	@Override
+	public double obtenerVolCompletoPaquetes() {	
+	double volTot=0;		
+		for (Paquete paquete:paquetesMegaTrailer) {
+			volTot+=paquete.getVol();
+		}	
+		 return volTot;	
+	}
+	
+	@Override
 	public String tipoTransporte() {
 		return "Mega Trailer";
 	}
@@ -92,23 +109,8 @@ public class MegaTrailer extends Transporte { //MegaTrailer HEREDA de transporte
 		}
 	}
 	
-	/*----------- Metodos ---------------*/
 
-	public double obtenerPesoCompletoPaquetes() {
-		double pesoTot=0;
-		for (Paquete paquete:paquetesMegaTrailer) {
-			 pesoTot+=paquete.getPeso();
-		}		
-		 return pesoTot;
-	}
 	
-	public double obtenerVolCompletoPaquetes() {	
-	double volTot=0;		
-		for (Paquete paquete:paquetesMegaTrailer) {
-			volTot+=paquete.getVol();
-		}	
-		 return volTot;	
-	}
 	
 	//---------------------------------------------------------------- FIN CLASE MEGATRAILER ----------------------------------------------------------------//	
 	
