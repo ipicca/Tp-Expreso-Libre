@@ -25,7 +25,7 @@ public class Flete extends Transporte  { //Flete HEREDA de transporte.
 	/*-----------toString de Fletes---------------*/
 	@Override
 	public String toString() {
-		return "\n" + " * Fletes: " + "\n" + "	Su costo por kilometro es: " + costoKm +"\n" + "	Cantidad de acompañantes: " + cantAcompaniantes 
+		return "\n" + " * Fletes: " +"\n" + "	Tiene refrigeracion: " + tieneRefrigeracion() + "\n" + "	Su costo por kilometro es: " + costoKm +"\n" + "	Cantidad de acompañantes: " + cantAcompaniantes 
 				+ "\n" + "	Su costo por acompañante es: " + costoPorAcompaniante + "\n";
 		}
 	
