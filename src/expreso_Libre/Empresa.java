@@ -282,57 +282,8 @@ public String obtenerTransporteIgual(String matricula) {
 		System.out.println("No existe un transporte igual a " + matricula); 	//Si no existe un igual, se informa y se pasa la matricula.
 		return null;															//Retornamos null ya que nunca se sobreescribe.
 	}
-	
+
+}
 
 	//---------------------------------------------------------------- FIN CLASE EMPRESA ----------------------------------------------------------------//
 	
-	
-	/*
-	public void mostrarViajesAsignadosTrasnporte() {
-		System.out.println();
-		System.out.println();
-		System.out.println("Destinos asignados a los transportes");
-	
-		
-		for (String key: LViajesAsignados.keySet()){  
-			System.out.println(key+ " = " + LViajesAsignados.get(key));
-		} 
-	}
-	
-	public void mostrasDestinos() {
-		for (Viaje dest:LDestinos) {
-			System.out.println(dest.getDestino());
-		}
-	}
-	
-	public void mostrarDepositosCargados() {
-
-		for(Deposito dep:depositos) {
-			if (dep.getRefrigferacion()) {
-				System.out.println("vol de dep con regri: "+dep.getCapacidadDeposito()+" "+dep.getRefrigferacion());
-			}
-			else {
-				System.out.println("vol de dep SIN regri: "+dep.getCapacidadDeposito()+" "+dep.getRefrigferacion());
-			}
-		}
-	}
-	
-	public void mostrarContenidoDelosDepositos() {
-		for (Deposito dep: depositos) {
-			dep.mostrarPaquetesDelDeposito();
-		}
-	}
-	
-	public void mostrarCargaTransporte(String matricula) {
-		Transporte transporte= LTransportes.get(matricula);
-		transporte.mostrarPaquetesCargados();
-	}
-	
-	void verDatosTrans(String matricula) {
-		Transporte trans= LTransportes.get(matricula);
-		trans.datosTransporte();
-	}
-	*/
-	
-
-}

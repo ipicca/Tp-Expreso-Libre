@@ -9,16 +9,13 @@ public class Main {
 		e.agregarDestino("Rosario", 100);
 		e.agregarDestino("Buenos Aires", 400);
 		e.agregarDestino("Mar del Plata", 800);
-	
-		
-
-		//e.mostrarDestinos();
 		
 		e.agregarTrailer("AA333XQ", 10000, 60, true, 2, 100);
 		e.agregarMegaTrailer("AA444PR", 15000, 100, false, 3, 150, 200, 50);
 		e.agregarFlete("AB555MN", 5000, 20, 4, 2, 300);
+		
 		e.asignarDestino("AA333XQ", "Buenos Aires");
-		//e.asignarDestino("AB555MN", "Rosario");
+		e.asignarDestino("AB555MN", "Rosario");
 		
 		// paquetes que necesitan frio
 		e.incorporarPaquete("Buenos Aires", 100, 2, true);
@@ -41,7 +38,7 @@ public class Main {
 		
 		System.out.println("Costo del viaje:$" +e.obtenerCostoViaje("AA333XQ"));	
 		
-		System.out.println(e.toString());
+		//System.out.println(e.toString());
 		
 		e.finalizarViaje("AA333XQ");
 	

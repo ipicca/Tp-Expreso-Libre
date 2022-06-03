@@ -74,9 +74,6 @@ public abstract class Transporte {	//Clase abstracta
 			enViaje=false;
 		}
 	}
-	
-	
-
 
 	public boolean tieneEspacioCarga() {
 		return cargaMax > 0 && capacidad >0;
@@ -90,11 +87,6 @@ public abstract class Transporte {	//Clase abstracta
 		cambiarViaje();	// enViaje = false;
 	}
 	
-	public void datosTransporte() {
-		System.out.println("capacidad= lts "+this.getCapacidad());
-		System.out.println("carga Max= kg "+this.getCargaMax());
-		System.out.println("Disp="+this.estado());
-	}
 	
 	/*----------- Metodos abstractos que obliga a implementar ---------------*/
 
@@ -111,8 +103,6 @@ public abstract class Transporte {	//Clase abstracta
 	public abstract double obtenerVolCompletoPaquetes();
 
 	public abstract void cargarPaqueteTransporte(Paquete paquete);
-	
-	public abstract void mostrarPaquetesCargados();
 	
 	public abstract void vaciarCarga();
 	

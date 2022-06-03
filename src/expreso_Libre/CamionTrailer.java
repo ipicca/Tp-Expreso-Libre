@@ -86,27 +86,9 @@ public class CamionTrailer extends Transporte  { //Camion trailer HEREDA de tran
 		return "Camion Trailer";
 	}
 	
-	@Override
-	public void mostrarPaquetesCargados() {	
-		if (paquetesCamionTrailer.size()==0) {
-			System.out.println("---------------------------");
-			System.out.println("Paquetes de CAMION TRAILER");
-			System.out.println("---------------------------");
-			System.out.println("-NO TIENE PAQUETES CARGADOS-");
-			System.out.println("---------------------------");	
-		}
-		for (Paquete paq:paquetesCamionTrailer) {
-			System.out.println("---------------------------");
-			System.out.println("Paquetes de CAMION TRAILER");
-			System.out.println("---------------------------");
-			System.out.println("destino:"+paq.getDestino());
-			System.out.println("peso:"+paq.getPeso());
-			System.out.println("volumen:"+paq.getVol());
-			System.out.println("Refri:"+paq.necesitaRefrigeracion());
-			System.out.println("---------------------------");
-		}
-	}
 	
+}	
+
 	//---------------------------------------------------------------- FIN CLASE CAMIONTRAILER ----------------------------------------------------------------//
 
-}
+

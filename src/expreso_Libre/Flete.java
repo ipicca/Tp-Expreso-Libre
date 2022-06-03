@@ -69,27 +69,6 @@ public class Flete extends Transporte  { //Flete HEREDA de transporte.
 		return "Flete";
 	}
 	
-	@Override
-	public void mostrarPaquetesCargados() {	
-		if (paquetesFlete.size()==0) {
-			System.out.println("---------------------------");
-			System.out.println("Paquetes de FLETE");
-			System.out.println("---------------------------");
-			System.out.println("-NO TIENE PAQUETES CARGADOS-");
-			System.out.println("---------------------------");	
-		}		
-		for (Paquete paq:paquetesFlete) {
-			System.out.println("---------------------------");
-			System.out.println("Paquetes de FLETE");
-			System.out.println("---------------------------");
-			System.out.println("destino:"+paq.getDestino());
-			System.out.println("peso:"+paq.getPeso());
-			System.out.println("volumen:"+paq.getVol());
-			System.out.println("Refri:"+paq.necesitaRefrigeracion());
-			System.out.println("---------------------------");
-		}
-	}
-	
 	/*----------- Metodos ---------------*/
 	
 	public double obtenerPesoCompletoPaquetes() {

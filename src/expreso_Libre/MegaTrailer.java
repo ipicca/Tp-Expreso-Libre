@@ -28,7 +28,7 @@ public class MegaTrailer extends Transporte { //MegaTrailer HEREDA de transporte
 	@Override
 	public String toString() {
 		return "\n" +" * MegaTrailer: " + "\n" + "	Tiene refrigeracion: " + tieneRefrigeracion + "\n" + "	Su costo por kilometro es: " + costoKm + "\n" + 
-	"	Tiene seguro de carga="+ segCarga +  "\n" + "	Su costo fijo es de: " + costoFijo +  "\n" + "	Su costo de comida es:" + costoComida +  "\n";
+	"	Tiene seguro de carga: "+ segCarga +  "\n" + "	Su costo fijo es de: " + costoFijo +  "\n" + "	Su costo de comida es: " + costoComida +  "\n";
 	}
 
 	
@@ -47,8 +47,8 @@ public class MegaTrailer extends Transporte { //MegaTrailer HEREDA de transporte
 	@Override
 	 public void cargarPaqueteTransporte(Paquete paquete) {
 		 paquetesMegaTrailer.add(paquete);
-		this.setCapacidad(paquete.getVol()); //se le resta el vol actual del trasporte - paquete
-		this.setCargaMax(paquete.getPeso()); //se le resta el peso actual del transporte
+		this.setCapacidad(paquete.getVol()); 				//Se le resta el vol actual del trasporte - paquete.
+		this.setCargaMax(paquete.getPeso()); 				//Se le resta el peso actual del transporte.
 	}
 	
 	@Override
@@ -87,32 +87,9 @@ public class MegaTrailer extends Transporte { //MegaTrailer HEREDA de transporte
 	public String tipoTransporte() {
 		return "Mega Trailer";
 	}
-	
-	@Override
-	public void mostrarPaquetesCargados() {	
-		if (paquetesMegaTrailer.size()==0) {
-			System.out.println("---------------------------");
-			System.out.println("Paquetes de MEGA TRAILER");
-			System.out.println("---------------------------");
-			System.out.println("-NO TIENE PAQUETES CARGADOS-");
-			System.out.println("---------------------------");			
-		}	
-		for (Paquete paq:paquetesMegaTrailer) {
-			System.out.println("---------------------------");
-			System.out.println("Paquetes de MEGA TRAILER");
-			System.out.println("---------------------------");
-			System.out.println("destino:"+paq.getDestino());
-			System.out.println("peso:"+paq.getPeso());
-			System.out.println("volumen:"+paq.getVol());
-			System.out.println("Refri:"+paq.necesitaRefrigeracion());
-			System.out.println("---------------------------");
-		}
-	}
-	
+		
+}
 
-	
-	
 	//---------------------------------------------------------------- FIN CLASE MEGATRAILER ----------------------------------------------------------------//	
 	
-}
 
