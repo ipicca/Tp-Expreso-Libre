@@ -259,22 +259,27 @@ public class Empresa {
 	// Busca si hay algún transporte igual en tipo, destino y carga. 
 	// En caso de que no se encuentre ninguno, se debe devolver null. 
 	
-	public String obtenerTransporteIgual(String matricula) {
+public String obtenerTransporteIgual(String matricula) {
 		
 		String matriculaIgual = null;
+		Transporte trans2=LTransportes.get(matricula);
+		String destAsigT2= LViajesAsignados.get(matricula);
+
 		
 		for(String elem : LTransportes.keySet()) { 								//Iteramos la lista de transporte con las keys --> matriculas.
-			Transporte trans1=LTransportes.get(elem);
-			Transporte trans2=LTransportes.get(matricula);
-			boolean ambosConRefri=trans1.tieneRefrigeracion()==trans2.tieneRefrigeracion();
 			
-			if(trans1.equals(trans2) && ambosConRefri ){						//Y comparamos con el .get de la matricula que nos pasan por parametro.
+			Transporte trans1=LTransportes.get(elem);
+			String destAsigT1= LViajesAsignados.get(elem);
+			boolean ambosConMismoDest= destAsigT1.equals(destAsigT2);
+			
+			if(trans1.equals(trans2) && ambosConMismoDest ){					//Y comparamos con el .get de la matricula que nos pasan por parametro.
 				matriculaIgual = LTransportes.get(elem).getMatricula();		  	//Si entra al if es porque hay un igual, entonces cargamos la matricula
-				return matriculaIgual;											//Del objetoTransporte en la variable a retornar.
+				return matriculaIgual;											//del objetoTransporte en la variable a retornar.
 			}										  							//Retornamos entonces la matricula.
 			
-			System.out.println("No existe un transporte igual a " + matricula); //Si no existe un igual, se informa y se pasa la matricula.
 		}
+		
+		System.out.println("No existe un transporte igual a " + matricula); 	//Si no existe un igual, se informa y se pasa la matricula.
 		return null;															//Retornamos null ya que nunca se sobreescribe.
 	}
 	

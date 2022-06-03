@@ -128,7 +128,8 @@ public abstract class Transporte {	//Clase abstracta
 		Transporte otro = (Transporte) obj;
 		return this.obtenerVolCompletoPaquetes() == otro.obtenerVolCompletoPaquetes() 
 				&& this.obtenerPesoCompletoPaquetes() == otro.obtenerPesoCompletoPaquetes()
-				&& this.tipoTransporte().equals(otro.tipoTransporte());
+				&& this.tipoTransporte().equals(otro.tipoTransporte())
+				&& this.tieneRefrigeracion()==otro.tieneRefrigeracion();
 	}
 	
 	//---------------------------------------------------------------- FIN CLASE TRANSPORTE ----------------------------------------------------------------//	
