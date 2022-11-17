@@ -10,8 +10,8 @@
   
   Continuamos desarrollando el sistema en base a nuestro diagrama, modificandolo en el proceso.
   
-  Aplicamos conceptos claves de POO, tales como herencia, abstracción, polimorfismo y encapsulamiento.
-  
-  
+   Aplicamos conceptos claves de POO, tales como herencia, abstracción, polimorfismo y encapsulamiento.
+
+
 Nota final: 9.
 
